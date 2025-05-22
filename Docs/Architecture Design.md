@@ -1,70 +1,111 @@
-# Diseño de Arquitectura - Useit Library
 
-## Backend: Arquitectura y Organización
+# Architecture Design - Useit Library
 
-### Framework y Lenguaje
-El backend de Useit Library está desarrollado con **Django** y utiliza el patrón **MVC tradicional** más común en proyectos Django.
+## Backend: Architecture and Organization
 
-### Estructura del backend
-El proyecto Django se organiza con múltiples apps según la responsabilidad funcional. Cada app contiene sus propios modelos, vistas, serializadores, servicios y rutas:
+### Framework and Language
+The backend of Useit Library is developed using **Django** and follows the **traditional MVC pattern** commonly used in Django projects.
 
-- `users`: Gestión de usuarios y roles
-- `books`: Gestión de libros
-- `loans`: Registro de préstamos y devoluciones
+### Backend Structure
+The Django project is organized into multiple apps based on functional responsibility. Each app contains its own models, views, serializers, services, and routes:
 
-Cada app puede incluir:
+- `users`: User and role management
+- `books`: Book management
+- `loans`: Loan and return registration
 
-- `models.py`: definición del modelo de datos
-- `serializers.py`: serialización y validación de datos
-- `views.py`: vistas basadas en clases con DRF
-- `services.py`: lógica de negocio desacoplada
-- `urls.py`: rutas específicas por módulo
+Each app may include:
 
-### Roles y Permisos
-- **Administrador**: puede crear, editar y eliminar libros.
-- **Usuario regular**: puede listar libros, ver detalles y tomar o devolver préstamos.
+- `models.py`: data model definitions
+- `serializers.py`: data serialization and validation
+- `views.py`: class-based views using DRF
+- `services.py`: decoupled business logic
+- `urls.py`: module-specific routes
 
-Los permisos se gestionan a través de roles definidos en el modelo `User` y verificados en las vistas.
+### Roles and Permissions
+- **Administrator**: can create, edit, and delete books.
+- **Regular User**: can list books, view details, and borrow or return books.
 
-### Validaciones y Documentación de API
-- Las validaciones se hacen desde los `serializers` de DRF.
-- La documentación de la API se puede realizar mediante herramientas como Postman, como se solicita en la prueba.
+Permissions are managed through roles defined in the `User` model and enforced in views.
 
----
-
-## Frontend: Organización
-
-### Lenguaje y Librerías
-El frontend está construido usando **HTML y CSS con Bootstrap**, según lo requerido en la prueba.
-
-### Diseño y Responsividad
-- Se utiliza **Bootstrap** para garantizar una interfaz profesional y responsiva.
-- Las vistas están organizadas por plantillas HTML en carpetas por módulo (`templates/books`, `templates/users`, etc.).
+### Validation and API Documentation
+- Validations are handled by DRF `serializers`.
+- API documentation can be generated using tools like Postman, as required in the test.
 
 ---
 
-## Base de Datos
+## Frontend: Structure
 
-### Motor
-La base de datos usada en producción y desarrollo es **PostgreSQL**.
+### Language and Libraries
+The frontend is built using **HTML and CSS with Bootstrap**, as required by the test.
 
-### Estructura
-Se implementan tres entidades principales basadas en el diagrama ER:
+### Design and Responsiveness
+- **Bootstrap** is used to ensure a professional and responsive UI.
+- Responsive design is implemented using Bootstrap's grid system and components.
+- `cards` are used to display books, `tables` for history, and consistent form styling.
 
-- **Book**: título, autor, año de publicación, stock
-- **User**: nombre, correo, rol
-- **Loan**: entidad intermedia que registra préstamos, fechas y devoluciones
-
----
-
-## Estructura del Repositorio
+### Frontend Structure
+The frontend is located outside the Django backend folder and follows this structure:
 
 ```plaintext
-main                # Rama protegida para lanzamientos estables
+frontend/
+├── index.html                 # Main page displaying book listings
+├── login.html                 # Login form
+├── register.html              # User registration form
+├── dashboard.html             # User dashboard for loan history and returns
+
+├── css/                       # Stylesheets
+│   ├── common.css             # Shared styles (navbar, layout, typography)
+│   ├── index.css              # Styles for index.html
+│   ├── login.css              # Styles for login.html
+│   ├── register.css           # Styles for register.html
+│   └── dashboard.css          # Styles for dashboard.html
+
+├── js/                        # JavaScript files
+│   ├── common.js              # Shared functions (JWT handling, helpers)
+│   ├── index.js               # Fetch and render books in index.html
+│   ├── login.js               # Authentication logic and token storage
+│   ├── register.js            # Form validation and registration logic
+│   └── dashboard.js           # Logic for viewing and returning loans
+
+└── assets/                    # Static resources
+    └── logo.png               # Logo or other image assets
+
+
+### User Flow
+1. The user accesses the login or registration page.
+2. After authentication, the JWT token is stored in `localStorage`.
+3. The user can view the list of available books.
+4. The user can borrow a book.
+5. The user accesses the dashboard to view history and return books.
+
+---
+
+## Database
+
+### Engine
+The database used in both production and development is **PostgreSQL**.
+
+### Structure
+Three main entities are implemented based on the ER diagram:
+
+- **Book**: title, author, publication year, stock
+- **User**: name, email, role
+- **Loan**: intermediate entity that records loans, dates, and returns
+
+---
+
+## Repository Structure
+
+```plaintext
+main                # Protected branch for stable releases
 │
-├── development     # Rama principal de desarrollo
-│   ├── front       # Código del frontend (HTML, CSS, Bootstrap)
-│   └── back        # Código del backend Django
-│
-├── docs            # Documentación técnica y Postman
-└── database        # Scripts, migraciones y esquemas ER
+├── development     # Main development branch
+│   ├── front       # Frontend code (HTML, CSS, Bootstrap)
+│   └── back        # Backend Django code
+│       ├──feat/init-project
+│       ├──feat/jwt
+│       ├──feat/models
+│       ├──feat/serializers
+│       └──feat/views
+└── docs            # Technical documentation and Postman collection
+```
