@@ -1,13 +1,15 @@
 from rest_framework import serializers
-from user.models import User
+from django.contrib.auth import get_user_model
 from loan.models import Loan
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     borrowed_books = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'role', 'borrowed_books']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role', 'borrowed_books']
 
     def get_borrowed_books(self, obj):
         loans = Loan.objects.filter(user=obj)
