@@ -1,0 +1,1 @@
+-e "\n__pycache__/\n*.pyc" 
