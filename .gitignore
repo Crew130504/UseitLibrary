@@ -35,8 +35,10 @@ __pycache__/
 Thumbs.db
 
 # Migraciones
-**/migrations/
-!**/migrations/__init__.py
+**/migrations/*.pyc
+**/migrations/*.pyo
+**/migrations/*.pyd
+**/migrations/__pycache__/
 
 # Archivos de cobertura/pruebas
 htmlcov/
