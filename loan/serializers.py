@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from loan.models import Loan
 from book.models import Book
-from book.serializers import BookSimpleSerializer  # ✅ nuevo import
+from book.serializers import BookSimpleSerializer  
 
 class LoanSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
-    book = BookSimpleSerializer(read_only=True)  # ✅ cambio aquí
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all()) 
 
     class Meta:
         model = Loan
