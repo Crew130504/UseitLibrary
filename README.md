@@ -1,3 +1,8 @@
+Aquí tienes el `README.md` actualizado con información sobre el despliegue en Render:
+
+---
+
+````markdown
 # Useit Library
 
 This is a Django-based library management system, implementing user authentication, book management, borrowing, and returning functionalities.
@@ -10,6 +15,7 @@ This is a Django-based library management system, implementing user authenticati
 * Borrow and return books functionality
 * REST API built with Django REST Framework
 * Postman API collection for testing
+* ✅ Live deployment on [Render](https://useitlibrary.onrender.com)
 
 ## Technologies Used
 
@@ -17,6 +23,7 @@ This is a Django-based library management system, implementing user authenticati
 * Django REST Framework
 * PostgreSQL
 * Bootstrap (frontend)
+* Render (cloud deployment)
 
 ## Setup Instructions
 
@@ -33,7 +40,7 @@ Clone the repository:
 ```bash
 git clone <your-repo-url>
 cd UseitLibrary
-```
+````
 
 ### Windows Automated Setup Script
 
@@ -101,7 +108,7 @@ Create superuser:
 python manage.py createsuperuser
 ```
 
-### Run the Application
+### Run the Application Locally
 
 Start the server:
 
@@ -111,6 +118,18 @@ python manage.py runserver
 
 Access the application at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
+---
+
+## 🌐 Deployment
+
+This application is live at:
+👉 **[https://useitlibrary.onrender.com](https://useitlibrary.onrender.com)**
+
+Deployment is done using Render with automatic GitHub deploys and environment variables configured in the dashboard.
+
+---
+
 ## API Usage
 
-The REST API endpoints are available at `/api/`. Detailed documentation and test cases are provided in the Postman collection JSON file (`UseitLibrary_API.postman_collection.json`).
+The REST API endpoints are available at `/api/`.
+Detailed documentation and test cases are provided in the Postman collection JSON file (`Useit Library API.json`).
