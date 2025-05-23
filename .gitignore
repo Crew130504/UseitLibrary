@@ -52,4 +52,8 @@ staticfiles/
 local_settings.py
 
 # Archivos de Postman o docs temporales
+<<<<<<< HEAD
 *.postman_collection.json
+=======
+*.postman_collection.json
+>>>>>>> docs
