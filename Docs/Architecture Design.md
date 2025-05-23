@@ -1,111 +1,145 @@
-
 # Architecture Design - Useit Library
 
 ## Backend: Architecture and Organization
 
 ### Framework and Language
-The backend of Useit Library is developed using **Django** and follows the **traditional MVC pattern** commonly used in Django projects.
+The backend of Useit Library is developed using **Django** and follows the **MTV pattern** (Model-Template-View). It leverages **Django REST Framework** for building RESTful APIs.
 
 ### Backend Structure
-The Django project is organized into multiple apps based on functional responsibility. Each app contains its own models, views, serializers, services, and routes:
+The Django project is organized into three main apps based on functionality:
 
-- `users`: User and role management
-- `books`: Book management
-- `loans`: Loan and return registration
+- `book`: book catalog and management
+- `loan`: loan creation, return and history
+- `user`: authentication and user profile management
 
-Each app may include:
+Each app includes:
 
-- `models.py`: data model definitions
-- `serializers.py`: data serialization and validation
-- `views.py`: class-based views using DRF
-- `services.py`: decoupled business logic
-- `urls.py`: module-specific routes
+- `models.py`: ORM model definitions
+- `serializers.py`: DRF serializers for validation and serialization
+- `views.py`: API views and frontend-compatible views
+- `permissions.py`: custom permission classes (in user app)
+- `urls.py`: app-level routing
+- `templates/`: HTML templates per module
+- `tests.py`: unit tests for API and business logic
 
-### Roles and Permissions
-- **Administrator**: can create, edit, and delete books.
-- **Regular User**: can list books, view details, and borrow or return books.
+The `Useit_Library` root module handles project-level settings, routing and WSGI entry.
 
-Permissions are managed through roles defined in the `User` model and enforced in views.
+### JWT Authentication
+JWT tokens are implemented using `rest_framework_simplejwt`.
+- `TokenObtainPairView` for login
+- `TokenRefreshView` for refreshing tokens
+- All protected endpoints use `IsAuthenticated` along with role-based permissions (`IsAdminRole`, `IsRegularUser`).
 
-### Validation and API Documentation
-- Validations are handled by DRF `serializers`.
-- API documentation can be generated using tools like Postman, as required in the test.
+### API Overview
+- `POST /api/users/registerAPI/` — register user
+- `POST /api/loginAPI/` — JWT login
+- `GET /api/users/me/` — get current user info
+
+- `GET /api/books/data/` — list books
+- `GET /api/books/<id>/` — book details
+- `POST /api/books/create/` — create book (admin)
+- `PUT /api/books/<id>/update/` — update book (admin)
+- `DELETE /api/books/<id>/delete/` — delete book (admin)
+
+- `POST /api/loans/create/` — borrow book (user)
+- `PUT /api/loans/return/<id>/` — return book (user)
+- `GET /api/loans/history/` — view own loan history (user)
 
 ---
 
-## Frontend: Structure
-
-### Language and Libraries
-The frontend is built using **HTML and CSS with Bootstrap**, as required by the test.
-
-### Design and Responsiveness
-- **Bootstrap** is used to ensure a professional and responsive UI.
-- Responsive design is implemented using Bootstrap's grid system and components.
-- `cards` are used to display books, `tables` for history, and consistent form styling.
-
-### Frontend Structure
-The frontend is located outside the Django backend folder and follows this structure:
+## Project Structure (File System)
 
 ```plaintext
-frontend/
-├── index.html                 # Main page displaying book listings
-├── login.html                 # Login form
-├── register.html              # User registration form
-├── dashboard.html             # User dashboard for loan history and returns
-
-├── css/                       # Stylesheets
-│   ├── common.css             # Shared styles (navbar, layout, typography)
-│   ├── index.css              # Styles for index.html
-│   ├── login.css              # Styles for login.html
-│   ├── register.css           # Styles for register.html
-│   └── dashboard.css          # Styles for dashboard.html
-
-├── js/                        # JavaScript files
-│   ├── common.js              # Shared functions (JWT handling, helpers)
-│   ├── index.js               # Fetch and render books in index.html
-│   ├── login.js               # Authentication logic and token storage
-│   ├── register.js            # Form validation and registration logic
-│   └── dashboard.js           # Logic for viewing and returning loans
-
-└── assets/                    # Static resources
-    └── logo.png               # Logo or other image assets
-
-
-### User Flow
-1. The user accesses the login or registration page.
-2. After authentication, the JWT token is stored in `localStorage`.
-3. The user can view the list of available books.
-4. The user can borrow a book.
-5. The user accesses the dashboard to view history and return books.
-
----
-
-## Database
-
-### Engine
-The database used in both production and development is **PostgreSQL**.
-
-### Structure
-Three main entities are implemented based on the ER diagram:
-
-- **Book**: title, author, publication year, stock
-- **User**: name, email, role
-- **Loan**: intermediate entity that records loans, dates, and returns
-
----
-
-## Repository Structure
-
-```plaintext
-main                # Protected branch for stable releases
+UseitLibrary/
+├── Docs/
+│   ├── Diagrams/
+│   │   ├── Diagram-ER.png
+│   │   └── Diagram-UseCase.png
+│   ├── Architecture Design.md
+│   ├── Database.md
+│   └── Useit Library API.json
 │
-├── development     # Main development branch
-│   ├── front       # Frontend code (HTML, CSS, Bootstrap)
-│   └── back        # Backend Django code
-│       ├──feat/init-project
-│       ├──feat/jwt
-│       ├──feat/models
-│       ├──feat/serializers
-│       └──feat/views
-└── docs            # Technical documentation and Postman collection
+├── Useit_Library/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── book/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/book/
+│       ├── detail.html
+│       ├── index.html
+│       └── management.html
+│
+├── loan/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/loan/
+│       └── loan.html
+│
+├── user/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── permissions.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/user/
+│       ├── dashboard.html
+│       ├── login.html
+│       └── register.html
+│
+├── static/
+│   ├── assets/
+│   ├── css/
+│   └── js/
+│
+├── templates/
+│   └── base.html
+│
+├── .env
+├── .gitignore
+├── LICENSE
+├── README.md
+├── manage.py
+└── requirements.txt
 ```
+
+---
+
+## Repository Branches
+
+```plaintext
+main                # Stable branch           # Frontend isolated branch
+├── deploy          # For deployment setup
+├── development     # Development integration
+    ├── back            # Backend isolated branch
+    |   ├── feat/init-project
+    |   ├── feat/jwt
+    |   ├── feat/models
+    |   ├── feat/serializers
+    |   └──feat/views
+    └──front
+├── docs            # Markdown and Postman documentation
+
+```
+
+---
