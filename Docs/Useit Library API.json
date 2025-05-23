@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "b8ef5d8b-6bde-4a46-9cd0-106927fc5142",
+		"name": "Useit Library API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835700"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [{"key": "Content-Type", "value": "application/json"}],
+						"body": {"mode": "raw", "raw": "{\"username\": \"\", \"password\": \"\"}"},
+						"url": "http://localhost:8000/api/loginAPI/"
+					}
+				},
+				{
+					"name": "Token Refresh",
+					"request": {
+						"method": "POST",
+						"header": [{"key": "Content-Type", "value": "application/json"}],
+						"body": {"mode": "raw", "raw": "{\"refresh\": \"\"}"},
+						"url": "http://localhost:8000/api/token/refresh/"
+					}
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [{"key": "Content-Type", "value": "application/json"}],
+						"body": {"mode": "raw", "raw": "{\"username\": \"\", \"email\": \"\", \"password\": \"\"}"},
+						"url": "http://localhost:8000/api/users/registerAPI/"
+					}
+				},
+				{
+					"name": "Current User",
+					"request": {
+						"method": "GET",
+						"header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+						"url": "http://localhost:8000/api/users/me/"
+					}
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "List Books",
+					"request": {"method": "GET", "url": "http://localhost:8000/api/books/data/"}
+				},
+				{
+					"name": "Book Detail",
+					"request": {"method": "GET", "url": "http://localhost:8000/api/books/1/"}
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+						"body": {"mode": "raw", "raw": "{\"title\":\"\",\"author\":\"\",\"publication_year\":2024,\"stock\":5}"},
+						"url": "http://localhost:8000/api/books/create/"
+					}
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+						"body": {"mode": "raw", "raw": "{\"title\":\"\",\"author\":\"\",\"publication_year\":2024,\"stock\":10}"},
+						"url": "http://localhost:8000/api/books/1/update/"
+					}
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+						"url": "http://localhost:8000/api/books/1/delete/"
+					}
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "Create Loan",
+					"request": {"method": "POST", "url": "http://localhost:8000/api/loans/create/"}
+				},
+				{
+					"name": "Return Loan",
+					"request": {"method": "PUT", "url": "http://localhost:8000/api/loans/return/1/"}
+				},
+				{
+					"name": "Loan History",
+					"request": {"method": "GET", "url": "http://localhost:8000/api/loans/history/"}
+				}
+			]
+		}
+	]
+}
