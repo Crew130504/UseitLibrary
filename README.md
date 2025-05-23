@@ -1,8 +1,3 @@
-Aquí tienes el `README.md` actualizado con información sobre el despliegue en Render:
-
----
-
-````markdown
 # Useit Library
 
 This is a Django-based library management system, implementing user authentication, book management, borrowing, and returning functionalities.
