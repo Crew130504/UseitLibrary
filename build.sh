@@ -18,7 +18,7 @@ from django.db import connection
 User = get_user_model()
 tables = connection.introspection.table_names()
 if User._meta.db_table in tables and not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin123', role='admin')
     print('Superuser created.')
 else:
     print('Superuser already exists or table missing.')
