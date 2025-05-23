@@ -15,7 +15,7 @@ This is a Django-based library management system, implementing user authenticati
 * Borrow and return books functionality
 * REST API built with Django REST Framework
 * Postman API collection for testing
-* ✅ Live deployment on [Render](https://useitlibrary.onrender.com)
+* Live deployment on [Render](https://useitlibrary.onrender.com)
 
 ## Technologies Used
 
@@ -120,13 +120,15 @@ Access the application at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 This application is live at:
-👉 **[https://useitlibrary.onrender.com](https://useitlibrary.onrender.com)**
+**[https://useitlibrary.onrender.com](https://useitlibrary.onrender.com)**
 
 Deployment is done using Render with automatic GitHub deploys and environment variables configured in the dashboard.
-
+Credential for testing:
+username:admin
+password:admin123
 ---
 
 ## API Usage
