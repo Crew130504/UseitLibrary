@@ -10,16 +10,23 @@
   {% block extra_css %}{% endblock %}
 </head>
 <body style="background-color: #F8F8F8;">
+<nav class="navbar navbar-expand-lg" style="background-color: #2B023E;">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">UseitLibrary</a>
 
-  <nav class="navbar navbar-expand-lg" style="background-color: #2B023E;">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white" href="#">UseitLibrary</a>
-      <div class="d-flex">
-        <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
-        <a href="{% url 'register' %}" class="btn btn-warning" style="background-color: #F4B400;">Register</a>
+    <div class="d-flex ms-auto align-items-center gap-2">
+      <!-- Login/Register buttons -->
+      <div class="d-flex" id="auth-buttons">
+        <a href="/api/users/login/" class="btn btn-outline-light me-2">Login</a>
+        <a href="/api/users/register/" class="btn btn-warning" style="background-color: #F4B400;">Register</a>
       </div>
+
+      <!-- Role-based buttons -->
+      <div class="d-flex gap-2" id="user-role-button" style="display: none;"></div>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   <div class="container mt-4">
     {% block content %}{% endblock %}
