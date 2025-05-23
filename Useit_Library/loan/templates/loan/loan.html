@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Loans{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/loan.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="not-authorized" class="alert alert-danger" style="display: none;">
+  You are not authorized to access this page.
+</div>
+
+<div id="loan-content" style="display: none;">
+  <h2 class="mb-4" style="color: #2B023E;">Borrow a Book</h2>
+  <div id="available-books" class="row g-3 mb-5"></div>
+
+  <h2 class="mb-4" style="color: #2B023E;">My Loan History</h2>
+  <div id="loan-list" class="row g-3"></div>
+</div>
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="{% static 'js/loan.js' %}"></script>
+{% endblock %}
