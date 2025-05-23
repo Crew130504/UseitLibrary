@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   .then(response => {
     const user = response.data;
-    console.log("User info:", user);
 
     if (user.role === 'regular_user') {
       errorSection.style.display = 'none';
