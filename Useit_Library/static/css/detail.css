@@ -1,0 +1,16 @@
+#book-detail {
+  background-color: #ffffff;
+  border-left: 6px solid #2B023E;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+#book-detail h2 {
+  color: #2B023E;
+  font-weight: 600;
+}
+
+#book-detail p {
+  color: #60426F;
+  margin-bottom: 0.5rem;
+}
