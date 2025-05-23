@@ -16,7 +16,7 @@ class LoanCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        book = serializer.validated_data['book']
+        book = serializer.validated_data['book_id']
 
         if book.stock < 1:
             raise ValidationError(f"No stock available for book: {book.title}")

@@ -90,8 +90,9 @@ function loadAvailableBooks() {
 function borrowBook(bookId) {
   const token = localStorage.getItem('access');
 
-  axios.post('/api/loans/create/', { book: bookId }, {
-    headers: { Authorization: `Bearer ${token}` }
+  axios.post('/api/loans/create/', { book_id: bookId }, {
+    headers: { Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json' }
   })
   .then(() => {
     alert('Book borrowed successfully');
