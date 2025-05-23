@@ -1,7 +1,17 @@
 from rest_framework import generics, permissions
 from .models import Book
 from .serializers import BookSerializer
-from user.permissions import IsAdminRole  # Asegúrate de importar correctamente
+from user.permissions import IsAdminRole
+from django.shortcuts import render
+
+def book_list_template(request):
+    return render(request, 'book/index.html')
+
+def book_detail_template(request, id):
+    return render(request, 'book/detail.html')
+
+def management_template(request):
+    return render(request, 'book/management.html')
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()

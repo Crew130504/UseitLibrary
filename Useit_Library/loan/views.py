@@ -5,6 +5,10 @@ from django.utils.timezone import now
 from .models import Loan
 from .serializers import LoanSerializer
 from user.permissions import IsRegularUser
+from django.shortcuts import render
+
+def loan_template(request):
+    return render(request, 'loan/loan.html')
 
 class LoanCreateView(generics.CreateAPIView):
     serializer_class = LoanSerializer
