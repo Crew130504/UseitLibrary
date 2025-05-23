@@ -1,18 +1,10 @@
 from django.urls import path
-<<<<<<< HEAD
 from book.views import BookListView, BookDetailView, BookCreateView, BookUpdateView, BookDeleteView, book_list_template,book_detail_template, management_template
-=======
-from book.views import BookListView, BookDetailView, BookCreateView, BookUpdateView, BookDeleteView, book_list_template,book_detail_template
->>>>>>> front
 
 urlpatterns = [
     path('', book_list_template, name='book-home'), 
     path('books/<int:id>/', book_detail_template, name='book-detail'),
-<<<<<<< HEAD
     path('management/', management_template, name='book-management'),
-=======
-
->>>>>>> front
 
     path('api/books/data/', BookListView.as_view(), name='book-list'),
     path('api/books/<int:id>/', BookDetailView.as_view(), name='book-detail'),

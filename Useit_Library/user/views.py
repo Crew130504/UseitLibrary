@@ -4,7 +4,6 @@ from .serializers import UserSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import CustomTokenObtainPairSerializer
 from rest_framework.permissions import AllowAny
-<<<<<<< HEAD
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -26,15 +25,6 @@ def login_view(request):
 
 def register_view(request):
     return render(request, 'user/register.html')
-=======
-from django.http import HttpResponse
-
-def login_view(request):
-    return HttpResponse("Login page coming soon")
-
-def register_view(request):
-    return HttpResponse("Register page coming soon")
->>>>>>> front
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

@@ -10,11 +10,8 @@ def book_list_template(request):
 def book_detail_template(request, id):
     return render(request, 'book/detail.html')
 
-<<<<<<< HEAD
 def management_template(request):
     return render(request, 'book/management.html')
-=======
->>>>>>> front
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
