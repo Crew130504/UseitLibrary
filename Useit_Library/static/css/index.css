@@ -1,0 +1,28 @@
+.card {
+  border: none;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+  color: #2B023E;
+  font-weight: 600;
+}
+
+.card-text {
+  color: #60426F;
+}
+
+.btn-borrow {
+  background-color: #F4B400;
+  color: #fff;
+  border: none;
+}
+
+.btn-borrow:hover {
+  background-color: #d89e00;
+}
+
+h2 {
+  font-weight: 600;
+}

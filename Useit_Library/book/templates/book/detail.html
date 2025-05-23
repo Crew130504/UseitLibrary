@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Detail{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div id="book-detail" class="card shadow-sm p-4">
+    <!-- Book details will be loaded here -->
+  </div>
+  <a href="/" class="btn btn-secondary mt-3">← Back to Catalog</a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/detail.js' %}"></script>
+{% endblock %}
