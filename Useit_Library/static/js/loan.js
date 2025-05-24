@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   .then(response => {
     const user = response.data;
-    console.log("User info:", user);
 
     if (user.role === 'regular_user') {
       errorSection.style.display = 'none';
@@ -48,7 +47,7 @@ function loadLoans() {
       const item = document.createElement('div');
       item.className = 'card p-3';
       item.innerHTML = `
-        <p><strong>Book:</strong> ${loan.book.title}</p>
+        <p><strong>Book:</strong> ${loan.book_title}</p>
         <p><strong>Loan Date:</strong> ${new Date(loan.loan_date).toLocaleDateString()}</p>
         <p><strong>Status:</strong> ${loan.return_date ? 'Returned' : 'Active'}</p>
         ${!loan.return_date ? `<button class="btn btn-sm btn-primary" onclick="returnBook(${loan.id})">Return</button>` : ''}
@@ -73,7 +72,7 @@ function loadAvailableBooks() {
         card.className = 'col-md-4';
         card.innerHTML = `
           <div class="card h-100 p-3">
-            <h5>${book.title}</h5>
+            <h5>${book_title}</h5>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Stock:</strong> ${book.stock}</p>
             <button class="btn btn-success" onclick="borrowBook(${book.id})" ${book.stock === 0 ? 'disabled' : ''}>Borrow</button>
@@ -90,8 +89,9 @@ function loadAvailableBooks() {
 function borrowBook(bookId) {
   const token = localStorage.getItem('access');
 
-  axios.post('/api/loans/create/', { book: bookId }, {
-    headers: { Authorization: `Bearer ${token}` }
+  axios.post('/api/loans/create/', {book: bookId }, {
+    headers: { Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json' }
   })
   .then(() => {
     alert('Book borrowed successfully');
